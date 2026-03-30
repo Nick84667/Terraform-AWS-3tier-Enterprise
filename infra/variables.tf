@@ -47,3 +47,43 @@ variable "db_port" {
   type    = number
   default = 5432
 }
+
+variable "web_instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "web_desired_capacity" {
+  type    = number
+  default = 2
+}
+
+variable "web_min_capacity" {
+  type    = number
+  default = 2
+}
+
+variable "web_max_capacity" {
+  type    = number
+  default = 2
+}
+
+variable "app_instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "app_desired_capacity" {
+  type    = number
+  default = 2
+}
+
+variable "app_min_capacity" {
+  type    = number
+  default = 2
+}
+
+variable "app_max_capacity" {
+  type    = number
+  default = 2
+}

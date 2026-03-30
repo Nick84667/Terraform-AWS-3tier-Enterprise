@@ -73,3 +73,11 @@ output "internal_alb_zone_id" {
 output "app_target_group_arn" {
   value = module.alb_internal.app_target_group_arn
 }
+
+output "app_asg_name" {
+  value = module.app_tier.asg_name
+}
+
+output "app_launch_template_id" {
+  value = module.app_tier.launch_template_id
+}

@@ -76,3 +76,23 @@ module "alb_internal" {
     Env     = var.environment
   }
 }
+
+module "app_tier" {
+  source = "./modules/app-tier"
+
+  name_prefix       = local.name_prefix
+  subnet_ids        = module.network.app_subnet_ids
+  security_group_id = module.security.app_sg_id
+  target_group_arn  = module.alb_internal.app_target_group_arn
+  app_port          = var.app_port
+
+  instance_type    = var.app_instance_type
+  desired_capacity = var.app_desired_capacity
+  min_capacity     = var.app_min_capacity
+  max_capacity     = var.app_max_capacity
+
+  tags = {
+    Project = var.project_name
+    Env     = var.environment
+  }
+}
