@@ -41,3 +41,15 @@ output "app_sg_id" {
 output "db_sg_id" {
   value = module.security.db_sg_id
 }
+
+output "public_alb_dns_name" {
+  value = module.alb_public.alb_dns_name
+}
+
+output "public_alb_zone_id" {
+  value = module.alb_public.alb_zone_id
+}
+
+output "web_target_group_arn" {
+  value = module.alb_public.web_target_group_arn
+}

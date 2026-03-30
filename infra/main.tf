@@ -25,3 +25,19 @@ module "security" {
     Env     = var.environment
   }
 }
+
+module "alb_public" {
+  source = "./modules/alb-public"
+
+  name_prefix           = local.name_prefix
+  vpc_id                = module.network.vpc_id
+  public_subnet_ids     = module.network.public_subnet_ids
+  alb_security_group_id = module.security.alb_public_sg_id
+  target_port           = 80
+  health_check_path     = "/"
+
+  tags = {
+    Project = var.project_name
+    Env     = var.environment
+  }
+}
