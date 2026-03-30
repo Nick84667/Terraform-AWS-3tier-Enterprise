@@ -3,10 +3,10 @@ environment  = "lab"
 aws_region   = "eu-central-1"
 vpc_cidr     = "10.20.0.0/16"
 
-database_username = "admin"
+database_username = "dbadmin"
 
 az_count         = 2
-nat_gateway_mode = "single"
+nat_gateway_mode = "one_per_az"
 
 app_port = 8080
 db_port  = 5432
