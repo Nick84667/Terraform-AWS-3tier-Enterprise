@@ -53,3 +53,23 @@ output "public_alb_zone_id" {
 output "web_target_group_arn" {
   value = module.alb_public.web_target_group_arn
 }
+
+output "web_asg_name" {
+  value = module.web_tier.asg_name
+}
+
+output "web_launch_template_id" {
+  value = module.web_tier.launch_template_id
+}
+
+output "internal_alb_dns_name" {
+  value = module.alb_internal.alb_dns_name
+}
+
+output "internal_alb_zone_id" {
+  value = module.alb_internal.alb_zone_id
+}
+
+output "app_target_group_arn" {
+  value = module.alb_internal.app_target_group_arn
+}
