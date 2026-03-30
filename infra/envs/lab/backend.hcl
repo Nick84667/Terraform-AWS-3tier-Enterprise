@@ -1,5 +1,5 @@
-bucket         = "REPLACE_ME_TFSTATE_BUCKET"
+bucket         = "tfstate-3tier-enterprise-8466"
 key            = "terraform-aws-3tier-enterprise/lab/terraform.tfstate"
 region         = "eu-central-1"
-dynamodb_table = "REPLACE_ME_TF_LOCKS"
+dynamodb_table = "terraform-locks-3tier"
 encrypt        = true
