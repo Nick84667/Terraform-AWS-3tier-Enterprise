@@ -18,11 +18,6 @@ variable "database_username" {
   type = string
 }
 
-variable "database_password" {
-  type      = string
-  sensitive = true
-}
-
 variable "az_count" {
   type    = number
   default = 2
@@ -90,7 +85,7 @@ variable "app_max_capacity" {
 
 variable "database_engine" {
   type    = string
-  default = "aurora-postgresql"
+  default = "postgres"
 }
 
 variable "database_engine_version" {
@@ -105,7 +100,17 @@ variable "database_name" {
 
 variable "database_instance_class" {
   type    = string
-  default = "db.t4g.medium"
+  default = "db.t3.micro"
+}
+
+variable "database_allocated_storage" {
+  type    = number
+  default = 20
+}
+
+variable "database_storage_type" {
+  type    = string
+  default = "gp2"
 }
 
 variable "database_backup_retention_period" {

@@ -1,25 +1,17 @@
-output "cluster_id" {
-  value = aws_rds_cluster.this.id
+output "db_instance_id" {
+  value = aws_db_instance.this.id
 }
 
-output "cluster_arn" {
-  value = aws_rds_cluster.this.arn
+output "db_instance_arn" {
+  value = aws_db_instance.this.arn
 }
 
-output "writer_endpoint" {
-  value = aws_rds_cluster.this.endpoint
+output "db_endpoint" {
+  value = aws_db_instance.this.address
 }
 
-output "reader_endpoint" {
-  value = aws_rds_cluster.this.reader_endpoint
-}
-
-output "writer_instance_endpoint" {
-  value = aws_rds_cluster_instance.writer.endpoint
-}
-
-output "reader_instance_endpoint" {
-  value = aws_rds_cluster_instance.reader.endpoint
+output "db_port" {
+  value = aws_db_instance.this.port
 }
 
 output "db_subnet_group_name" {
@@ -27,5 +19,5 @@ output "db_subnet_group_name" {
 }
 
 output "instance_class" {
-  value = var.instance_class
+  value = aws_db_instance.this.instance_class
 }

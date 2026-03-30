@@ -104,23 +104,24 @@ module "database" {
   subnet_ids             = module.network.db_subnet_ids
   vpc_security_group_ids = [module.security.db_sg_id]
 
-  database_engine = var.database_engine
-  engine_version  = var.database_engine_version
-  database_name   = var.database_name
+  engine         = var.database_engine
+  engine_version = var.database_engine_version
+  db_name        = var.database_name
 
   master_username = var.database_username
-  master_password = var.database_password
 
-  instance_class = var.database_instance_class
+  instance_class    = var.database_instance_class
+  allocated_storage = var.database_allocated_storage
+  storage_type      = var.database_storage_type
 
   backup_retention_period = var.database_backup_retention_period
   apply_immediately       = true
 
-  deletion_protection      = var.database_deletion_protection
-  skip_final_snapshot      = var.database_skip_final_snapshot
-  delete_automated_backups = true
+  deletion_protection = var.database_deletion_protection
+  skip_final_snapshot = var.database_skip_final_snapshot
 
-  storage_encrypted = true
+  storage_encrypted   = true
+  publicly_accessible = false
 
   tags = {
     Project = var.project_name

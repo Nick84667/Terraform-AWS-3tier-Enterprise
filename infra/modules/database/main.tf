@@ -1,6 +1,6 @@
 locals {
-  cluster_identifier = "${var.name_prefix}-aurora"
-  db_subnet_name     = "${var.name_prefix}-db-subnet-group"
+  db_identifier  = "${var.name_prefix}-postgres"
+  db_subnet_name = "${var.name_prefix}-db-subnet-group"
 }
 
 resource "aws_db_subnet_group" "this" {
@@ -13,86 +13,37 @@ resource "aws_db_subnet_group" "this" {
   })
 }
 
-resource "aws_rds_cluster" "this" {
-  cluster_identifier = local.cluster_identifier
-  engine             = var.database_engine
-  engine_version     = var.engine_version
+resource "aws_db_instance" "this" {
+  identifier = local.db_identifier
 
-  database_name   = var.database_name
-  master_username = var.master_username
-  master_password = var.master_password
+  engine         = var.engine
+  engine_version = var.engine_version
+  instance_class = var.instance_class
+
+  allocated_storage = var.allocated_storage
+  storage_type      = var.storage_type
+
+  db_name  = var.db_name
+  username = var.master_username
+
+  manage_master_user_password = true
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = var.vpc_security_group_ids
 
-  backup_retention_period      = var.backup_retention_period
-  preferred_backup_window      = var.preferred_backup_window
-  preferred_maintenance_window = var.preferred_maintenance_window
+  publicly_accessible     = var.publicly_accessible
+  backup_retention_period = var.backup_retention_period
+  apply_immediately       = var.apply_immediately
+  deletion_protection     = var.deletion_protection
+  skip_final_snapshot     = var.skip_final_snapshot
 
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
 
-  apply_immediately         = var.apply_immediately
-  deletion_protection       = var.deletion_protection
-  skip_final_snapshot       = var.skip_final_snapshot
-  final_snapshot_identifier = var.skip_final_snapshot ? null : var.final_snapshot_identifier
-  delete_automated_backups  = var.delete_automated_backups
-  copy_tags_to_snapshot     = var.copy_tags_to_snapshot
+  multi_az = false
 
   tags = merge(var.tags, {
-    Name = local.cluster_identifier
-    Tier = "database"
-  })
-}
-
-# Prima istanza: creata per prima, così diventa il writer iniziale del cluster
-resource "aws_rds_cluster_instance" "writer" {
-  identifier         = "${var.name_prefix}-writer-1"
-  cluster_identifier = aws_rds_cluster.this.id
-  instance_class     = var.instance_class
-
-  engine         = aws_rds_cluster.this.engine
-  engine_version = var.engine_version
-
-  db_subnet_group_name                  = aws_db_subnet_group.this.name
-  publicly_accessible                   = false
-  apply_immediately                     = var.apply_immediately
-  monitoring_interval                   = var.monitoring_interval
-  performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
-
-  promotion_tier = 0
-
-  tags = merge(var.tags, {
-    Name = "${var.name_prefix}-writer-1"
-    Role = "writer"
-    Tier = "database"
-  })
-}
-
-# Seconda istanza: reader fisso
-resource "aws_rds_cluster_instance" "reader" {
-  identifier         = "${var.name_prefix}-reader-1"
-  cluster_identifier = aws_rds_cluster.this.id
-  instance_class     = var.instance_class
-
-  engine         = aws_rds_cluster.this.engine
-  engine_version = var.engine_version
-
-  db_subnet_group_name                  = aws_db_subnet_group.this.name
-  publicly_accessible                   = false
-  apply_immediately                     = var.apply_immediately
-  monitoring_interval                   = var.monitoring_interval
-  performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
-
-  promotion_tier = 1
-
-  depends_on = [aws_rds_cluster_instance.writer]
-
-  tags = merge(var.tags, {
-    Name = "${var.name_prefix}-reader-1"
-    Role = "reader"
+    Name = local.db_identifier
     Tier = "database"
   })
 }

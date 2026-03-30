@@ -82,18 +82,18 @@ output "app_launch_template_id" {
   value = module.app_tier.launch_template_id
 }
 
-output "aurora_cluster_id" {
-  value = module.database.cluster_id
+output "rds_instance_id" {
+  value = module.database.db_instance_id
 }
 
-output "aurora_writer_endpoint" {
-  value = module.database.writer_endpoint
+output "rds_endpoint" {
+  value = module.database.db_endpoint
 }
 
-output "aurora_reader_endpoint" {
-  value = module.database.reader_endpoint
+output "rds_port" {
+  value = module.database.db_port
 }
 
-output "aurora_instance_class" {
+output "rds_instance_class" {
   value = module.database.instance_class
 }
