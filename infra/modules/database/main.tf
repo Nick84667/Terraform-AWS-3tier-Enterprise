@@ -9,6 +9,7 @@ resource "aws_db_subnet_group" "this" {
 
   tags = merge(var.tags, {
     Name = local.db_subnet_name
+    Tier = "database"
   })
 }
 
@@ -17,28 +18,26 @@ resource "aws_rds_cluster" "this" {
   engine             = var.database_engine
   engine_version     = var.engine_version
 
-  availability_zones = length(var.availability_zones) > 0 ? var.availability_zones : null
-
-  database_name    = var.database_name
-  master_username  = var.master_username
-  master_password  = var.master_password
+  database_name   = var.database_name
+  master_username = var.master_username
+  master_password = var.master_password
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = var.vpc_security_group_ids
 
-  backup_retention_period    = var.backup_retention_period
-  preferred_backup_window    = var.preferred_backup_window
+  backup_retention_period      = var.backup_retention_period
+  preferred_backup_window      = var.preferred_backup_window
   preferred_maintenance_window = var.preferred_maintenance_window
 
-  storage_encrypted       = var.storage_encrypted
-  kms_key_id              = var.kms_key_id
+  storage_encrypted = var.storage_encrypted
+  kms_key_id        = var.kms_key_id
 
-  apply_immediately       = var.apply_immediately
-  deletion_protection     = var.deletion_protection
-  skip_final_snapshot     = var.skip_final_snapshot
+  apply_immediately         = var.apply_immediately
+  deletion_protection       = var.deletion_protection
+  skip_final_snapshot       = var.skip_final_snapshot
   final_snapshot_identifier = var.skip_final_snapshot ? null : var.final_snapshot_identifier
-  delete_automated_backups = var.delete_automated_backups
-  copy_tags_to_snapshot    = var.copy_tags_to_snapshot
+  delete_automated_backups  = var.delete_automated_backups
+  copy_tags_to_snapshot     = var.copy_tags_to_snapshot
 
   tags = merge(var.tags, {
     Name = local.cluster_identifier
@@ -55,11 +54,11 @@ resource "aws_rds_cluster_instance" "writer" {
   engine         = aws_rds_cluster.this.engine
   engine_version = var.engine_version
 
-  db_subnet_group_name                = aws_db_subnet_group.this.name
-  publicly_accessible                 = false
-  apply_immediately                   = var.apply_immediately
-  monitoring_interval                 = var.monitoring_interval
-  performance_insights_enabled        = var.performance_insights_enabled
+  db_subnet_group_name                  = aws_db_subnet_group.this.name
+  publicly_accessible                   = false
+  apply_immediately                     = var.apply_immediately
+  monitoring_interval                   = var.monitoring_interval
+  performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
 
   promotion_tier = 0
@@ -67,6 +66,7 @@ resource "aws_rds_cluster_instance" "writer" {
   tags = merge(var.tags, {
     Name = "${var.name_prefix}-writer-1"
     Role = "writer"
+    Tier = "database"
   })
 }
 
@@ -93,5 +93,6 @@ resource "aws_rds_cluster_instance" "reader" {
   tags = merge(var.tags, {
     Name = "${var.name_prefix}-reader-1"
     Role = "reader"
+    Tier = "database"
   })
 }

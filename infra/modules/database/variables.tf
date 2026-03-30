@@ -1,5 +1,5 @@
 variable "name_prefix" {
-  description = "Resource naming prefix"
+  description = "Common naming prefix"
   type        = string
 }
 
@@ -11,12 +11,6 @@ variable "subnet_ids" {
 variable "vpc_security_group_ids" {
   description = "Security groups attached to the Aurora cluster"
   type        = list(string)
-}
-
-variable "availability_zones" {
-  description = "Optional list of AZs for the Aurora cluster"
-  type        = list(string)
-  default     = []
 }
 
 variable "database_engine" {
@@ -144,7 +138,7 @@ variable "performance_insights_retention_period" {
 }
 
 variable "tags" {
-  description = "Tags applied to all DB resources"
+  description = "Additional tags"
   type        = map(string)
   default     = {}
 }

@@ -7,7 +7,6 @@ output "cluster_arn" {
 }
 
 output "writer_endpoint" {
-  # cluster endpoint = writer endpoint
   value = aws_rds_cluster.this.endpoint
 }
 

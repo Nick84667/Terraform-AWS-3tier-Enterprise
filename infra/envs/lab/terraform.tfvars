@@ -21,3 +21,11 @@ app_instance_type    = "t3.micro"
 app_desired_capacity = 2
 app_min_capacity     = 2
 app_max_capacity     = 2
+
+database_engine                  = "aurora-postgresql"
+database_engine_version          = null
+database_name                    = "appdb"
+database_instance_class          = "db.t4g.medium"
+database_backup_retention_period = 1
+database_deletion_protection     = false
+database_skip_final_snapshot     = true

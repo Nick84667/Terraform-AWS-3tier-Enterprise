@@ -96,3 +96,34 @@ module "app_tier" {
     Env     = var.environment
   }
 }
+
+module "database" {
+  source = "./modules/database"
+
+  name_prefix            = local.name_prefix
+  subnet_ids             = module.network.db_subnet_ids
+  vpc_security_group_ids = [module.security.db_sg_id]
+
+  database_engine = var.database_engine
+  engine_version  = var.database_engine_version
+  database_name   = var.database_name
+
+  master_username = var.database_username
+  master_password = var.database_password
+
+  instance_class = var.database_instance_class
+
+  backup_retention_period = var.database_backup_retention_period
+  apply_immediately       = true
+
+  deletion_protection      = var.database_deletion_protection
+  skip_final_snapshot      = var.database_skip_final_snapshot
+  delete_automated_backups = true
+
+  storage_encrypted = true
+
+  tags = {
+    Project = var.project_name
+    Env     = var.environment
+  }
+}

@@ -87,3 +87,38 @@ variable "app_max_capacity" {
   type    = number
   default = 2
 }
+
+variable "database_engine" {
+  type    = string
+  default = "aurora-postgresql"
+}
+
+variable "database_engine_version" {
+  type    = string
+  default = null
+}
+
+variable "database_name" {
+  type    = string
+  default = "appdb"
+}
+
+variable "database_instance_class" {
+  type    = string
+  default = "db.t4g.medium"
+}
+
+variable "database_backup_retention_period" {
+  type    = number
+  default = 1
+}
+
+variable "database_deletion_protection" {
+  type    = bool
+  default = false
+}
+
+variable "database_skip_final_snapshot" {
+  type    = bool
+  default = true
+}
