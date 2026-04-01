@@ -10,7 +10,8 @@ The repository already has an important validated baseline:
 - the lab environment uses **Amazon RDS for PostgreSQL** for cost-aware validation
 - a full `apply` / `destroy` retest has been completed successfully for the lab environment
 
-The goal of this roadmap is to make the next steps explicit, measurable, and aligned with the intended future delivery model based on **Jenkins** and **ArgoCD**.
+The goal of this roadmap is to make the next steps explicit, measurable, and aligned with the intended future delivery model based on 
+**Jenkins** and **ArgoCD**.
 
 ---
 
@@ -69,15 +70,14 @@ The main objectives of the roadmap are:
 - introduce validation and quality controls
 - prepare the repository for **Jenkins-based CI/CD**
 - define future alignment with **ArgoCD** and GitOps boundaries
-OAOAOA- support a clean path from lab validation to more production-oriented architecture
-
-OAOAOA---
+- support a clean path from lab validation to more production-oriented architecture
+---
 
 ## Milestone M1 — Documentation Foundation
-OAOAOA
-OAOAOA### Goal
 
-Establish a clear documentation baseline so that repository structure, contribution workflow, and engineering expectations are explicit.
+### Goal
+
+Establish a clear documentation baseline so that repository structure, contribution workflow, and engineering expectations are explicit
 
 ### Scope
 
@@ -168,7 +168,7 @@ This milestone focuses on Git workflow, branch discipline, and repository-level 
 - introduce or plan branch protection for `main`
 - define pull request expectations
 - define change review checklist
-[O- reduce direct manual changes without traceability
+- reduce direct manual changes without traceability
 
 ### Deliverables
 
