@@ -6,10 +6,7 @@ module "network" {
   azs              = local.azs
   nat_gateway_mode = var.nat_gateway_mode
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.network_tags
 }
 
 module "security" {
@@ -20,10 +17,7 @@ module "security" {
   app_port    = var.app_port
   db_port     = var.db_port
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.security_tags
 }
 
 module "alb_public" {
@@ -36,10 +30,7 @@ module "alb_public" {
   target_port           = 80
   health_check_path     = "/"
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.alb_public_tags
 }
 
 module "web_tier" {
@@ -55,10 +46,7 @@ module "web_tier" {
   min_capacity     = var.web_min_capacity
   max_capacity     = var.web_max_capacity
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.web_tier_tags
 }
 
 module "alb_internal" {
@@ -71,10 +59,7 @@ module "alb_internal" {
   target_port           = var.app_port
   health_check_path     = "/"
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.alb_internal_tags
 }
 
 module "app_tier" {
@@ -91,10 +76,7 @@ module "app_tier" {
   min_capacity     = var.app_min_capacity
   max_capacity     = var.app_max_capacity
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.app_tier_tags
 }
 
 module "database" {
@@ -123,8 +105,5 @@ module "database" {
   storage_encrypted   = true
   publicly_accessible = false
 
-  tags = {
-    Project = var.project_name
-    Env     = var.environment
-  }
+  tags = local.database_tags
 }
