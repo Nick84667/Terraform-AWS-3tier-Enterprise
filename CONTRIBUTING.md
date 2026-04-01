@@ -38,19 +38,19 @@ This guide applies to contributions involving:
 
 All contributions should follow these principles:
 
-- **small, focused changes**  
+- **small, focused changes**
   Prefer isolated changes over large mixed refactors.
 
-- **explicit intent**  
+- **explicit intent**
   The purpose of the change should be easy to understand from the branch name, commit message, and pull request description.
 
-- **validation before merge**  
+- **validation before merge**
   Infrastructure changes must be validated before they are merged.
 
-- **documentation as part of the change**  
+- **documentation as part of the change**
   If structure, standards, workflows, or architecture are affected, the documentation must be updated.
 
-- **safe evolution**  
+- **safe evolution**
   The repository should evolve in a way that preserves repeatability and supports future automation.
 
 ---

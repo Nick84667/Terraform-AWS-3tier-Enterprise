@@ -10,7 +10,7 @@ The repository already has an important validated baseline:
 - the lab environment uses **Amazon RDS for PostgreSQL** for cost-aware validation
 - a full `apply` / `destroy` retest has been completed successfully for the lab environment
 
-The goal of this roadmap is to make the next steps explicit, measurable, and aligned with the intended future delivery model based on 
+The goal of this roadmap is to make the next steps explicit, measurable, and aligned with the intended future delivery model based on
 **Jenkins** and **ArgoCD**.
 
 ---
@@ -19,19 +19,19 @@ The goal of this roadmap is to make the next steps explicit, measurable, and ali
 
 This roadmap is guided by the following principles:
 
-- **validate before hardening**  
+- **validate before hardening**
   Infrastructure must remain deployable and destroyable while the repository evolves.
 
-- **document before scaling**  
+- **document before scaling**
   Repository standards, workflows, and architectural intent must be documented before introducing more complexity.
 
-- **automate progressively**  
+- **automate progressively**
   Quality gates and CI/CD should be introduced incrementally, starting with repeatable local validation.
 
-- **separate responsibilities clearly**  
+- **separate responsibilities clearly**
   Terraform, Jenkins, and ArgoCD must have clearly defined boundaries.
 
-- **keep lab cost-aware while moving toward enterprise patterns**  
+- **keep lab cost-aware while moving toward enterprise patterns**
   The lab environment should remain low-cost, but architecturally aligned with the target platform direction.
 
 ---
@@ -561,4 +561,3 @@ The immediate priority is not maximum complexity. The immediate priority is to c
 - ready for progressive automation
 
 That is the foundation on which Jenkins pipelines and future ArgoCD alignment can be built with confidence.
-
