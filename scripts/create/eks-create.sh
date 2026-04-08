@@ -6,7 +6,7 @@ ENVIRONMENT="${1:-lab}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 ENV_DIR="${ROOT_DIR}/infra/envs/${ENVIRONMENT}"
-BACKEND_FILE="${ROOT_DIR}/infra/global/backend.hcl"
+BACKEND_FILE="${ENV_DIR}/backend.hcl"
 
 source "${ROOT_DIR}/scripts/lib/logging.sh"
 source "${ROOT_DIR}/scripts/lib/checks.sh"
