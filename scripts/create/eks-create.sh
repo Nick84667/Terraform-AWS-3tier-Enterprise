@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ENVIRONMENT="${1:-lab}"
+ENVIRONMENT="${1:-eks-lab}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
@@ -13,7 +13,7 @@ source "${ROOT_DIR}/scripts/lib/checks.sh"
 source "${ROOT_DIR}/scripts/lib/terraform.sh"
 
 log_step "Running prerequisite validation"
-"${ROOT_DIR}/scripts/create/validate-prereqs.sh"
+"${ROOT_DIR}/scripts/create/validate-prereqs.sh" "${ENVIRONMENT}"
 
 require_dir "${ENV_DIR}"
 require_file "${ENV_DIR}/terraform.tfvars"
