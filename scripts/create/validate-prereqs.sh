@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ENVIRONMENT="${1:-eks-lab}"
+ENABLE_ARGOCD_BOOTSTRAP="${ENABLE_ARGOCD_BOOTSTRAP:-false}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
@@ -16,8 +17,14 @@ log_step "Validating local prerequisites for environment: ${ENVIRONMENT}"
 require_command git
 require_command terraform
 require_command aws
-require_command kubectl
-require_command helm
+
+if [[ "${ENABLE_ARGOCD_BOOTSTRAP}" == "true" ]]; then
+  log_info "Argo CD bootstrap enabled: validating kubectl and helm"
+  require_command kubectl
+  require_command helm
+else
+  log_info "Argo CD bootstrap disabled: skipping kubectl and helm prerequisite checks"
+fi
 
 log_info "Checking AWS credentials"
 aws sts get-caller-identity >/dev/null
@@ -43,10 +50,12 @@ fi
 log_info "Terraform version"
 terraform version
 
-log_info "kubectl client version"
-kubectl version --client
+if [[ "${ENABLE_ARGOCD_BOOTSTRAP}" == "true" ]]; then
+  log_info "kubectl client version"
+  kubectl version --client
 
-log_info "helm version"
-helm version
+  log_info "helm version"
+  helm version
+fi
 
 log_info "Prerequisites validation completed successfully"
