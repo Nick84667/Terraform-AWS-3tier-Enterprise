@@ -8,7 +8,7 @@ kubernetes_version = "1.33"
 vpc_cidr = "10.30.0.0/16"
 az_count = 2
 
-node_instance_types = ["t3.medium"]
+node_instance_types = ["t3.micro"]
 
 desired_size = 2
 min_size     = 1

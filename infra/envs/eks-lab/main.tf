@@ -1,10 +1,12 @@
 terraform {
   required_version = ">= 1.6.0"
 
+  backend "s3" {}
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.0"
+      version = ">= 5.95.0, < 6.0.0"
     }
   }
 }
@@ -70,18 +72,18 @@ module "vpc" {
 module "eks" {
   source = "../../modules/eks"
 
-  aws_region         = var.aws_region
-  environment        = var.environment
-  cluster_name       = var.cluster_name
-  kubernetes_version = var.kubernetes_version
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnets
-  public_subnet_ids  = module.vpc.public_subnets
+  aws_region                      = var.aws_region
+  environment                     = var.environment
+  cluster_name                    = var.cluster_name
+  kubernetes_version              = var.kubernetes_version
+  vpc_id                          = module.vpc.vpc_id
+  private_subnet_ids              = module.vpc.private_subnets
+  public_subnet_ids               = module.vpc.public_subnets
 
-  node_instance_types = var.node_instance_types
-  desired_size        = var.desired_size
-  min_size            = var.min_size
-  max_size            = var.max_size
+  node_instance_types             = var.node_instance_types
+  desired_size                    = var.desired_size
+  min_size                        = var.min_size
+  max_size                        = var.max_size
 
   cluster_endpoint_public_access  = var.cluster_endpoint_public_access
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
